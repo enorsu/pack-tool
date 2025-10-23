@@ -51,6 +51,7 @@ class PackTool():
         if not self.configuration["actions"]["imagemagick"]["enabled"]:
             return print("no imagemagick, doing nothing")
         
+        # get all the settings from config
         binary = self.configuration["actions"]["imagemagick"]["binary"]
         arguments = self.configuration["actions"]["imagemagick"]["arguments"]
 
@@ -58,17 +59,27 @@ class PackTool():
 
         files = self.search(directory, "png")
         
+        # total count of these things
         total = len(files)
 
         for i in range(total):
+
+            # make it like this for easy access
+
             file = files[i]
+
+            # i like headcrabs
+
             self.imagemagick(infile=file, outfile=file, binary=binary, arguments=arguments)
+
+            # print out some kind of progress 
             print(f"[{i + 1}/{total}]{file}")
     def autosox(self):
         # if its not enabled then dont do it 
         if not self.configuration["actions"]["sox"]["enabled"]:
             return print("no sox, doing nothing")
         
+        # get config
         binary = self.configuration["actions"]["sox"]["binary"]
         arguments = self.configuration["actions"]["sox"]["arguments"]
 
@@ -79,13 +90,20 @@ class PackTool():
         total = len(files)
 
         for i in range(total):
+            # easy access
             file = files[i]
+
+            # "and thats how he got abused"
+
             self.sox(infile=file, outfile=file, binary=binary, arguments=arguments)
+
+            # some kinda progress
             print(f"[{i + 1}/{total}]{file}")
     def automatic(self):
         # yuh
         self.autoimg()
         self.autosox()
 
+# leave me alone
 packtool = PackTool()
 
