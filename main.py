@@ -68,12 +68,14 @@ class PackTool():
 
             file = files[i]
 
-            # i like headcrabs
-
-            self.imagemagick(infile=file, outfile=file, binary=binary, arguments=arguments)
-
+            
             # print out some kind of progress 
             print(f"[{i + 1}/{total}]{file}")
+
+            # i like headcrabs
+            self.imagemagick(infile=file, outfile=file, binary=binary, arguments=arguments)
+
+
     def autosox(self):
         # if its not enabled then dont do it 
         if not self.configuration["actions"]["sox"]["enabled"]:
@@ -93,12 +95,14 @@ class PackTool():
             # easy access
             file = files[i]
 
+            # some kinda progress
+            print(f"[{i + 1}/{total}]{file}")
+
             # "and thats how he got abused"
 
             self.sox(infile=file, outfile=file, binary=binary, arguments=arguments)
 
-            # some kinda progress
-            print(f"[{i + 1}/{total}]{file}")
+
     def automatic(self):
         # yuh
         self.autoimg()
