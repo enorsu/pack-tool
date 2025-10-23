@@ -106,4 +106,5 @@ class PackTool():
 
 # leave me alone
 packtool = PackTool()
+packtool.automatic()
 
