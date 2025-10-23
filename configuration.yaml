@@ -1,0 +1,11 @@
+folder: "./soundtest"
+
+actions:
+  imagemagick:
+    enabled: True
+    binary: "magick"
+    arguments: "-spread 2 -resize 300%"
+  sox:
+    enabled: True
+    binary: "sox"
+    arguments: "-v 1000"
