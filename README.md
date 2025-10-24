@@ -2,7 +2,9 @@
 
 A simple tool for applying customizations to resource packs.
 
-# Depencencies
+> Note: this tool is exclusively tested on Linux.(it should run on most Un*x-like systems as well)
+
+## Depencencies
 
 ### Optional
 
@@ -18,7 +20,7 @@ A simple tool for applying customizations to resource packs.
 - `python`
 - `python-pyyaml` or PyPi package `pyyaml`
 
-# Usage
+## Usage
 
 - Configure your settings in the [configuration.yaml](./configuration.yaml) file.
 - Run the script, if it fails, read your configuration.yml again or file an issue
