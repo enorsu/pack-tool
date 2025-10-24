@@ -9,6 +9,9 @@ class PackTool():
         print("pack-tool by enorsu(idk why i put my name here)")
         self.loadConfiguration("./configuration.yaml")
 
+    def optimize(self, infile, arguments, binary):
+        os.system(f"{binary} {arguments} {infile}")
+
     def imagemagick(self, infile, outfile, arguments, binary):
         # run command
         os.system(f"{binary} {infile} {arguments} {outfile}")
@@ -45,6 +48,40 @@ class PackTool():
         with open(filename, "r") as file:
             self.configuration = yaml.safe_load(file.read())
         print("config loaded", filename)
+
+    def log(self, filename, max, current):
+        print(f"[{current + 1}/{max}]{filename}")
+
+    def autooptimize(self):
+        # yes i pasted and i don't care about your opinion
+        # if its not enabled then dont do it 
+        if not self.configuration["actions"]["optimize"]["enabled"]:
+            return print("no optimization, doing nothing")
+        
+        # get all the settings from config
+        binary = self.configuration["actions"]["optimize"]["binary"]
+        arguments = self.configuration["actions"]["optimize"]["arguments"]
+
+        directory = self.configuration["folder"]
+
+        files = self.search(directory, "png")
+        
+        # total count of these things
+        total = len(files)
+
+        for i in range(total):
+
+            # make it like this for easy access
+
+            file = files[i]
+
+            
+            # print out some kind of progress
+            self.log(file, total, i)
+            
+
+            # i like eating crowbars
+            self.optimize(infile=file, binary=binary, arguments=arguments)
     
     def autoimg(self):
         # if its not enabled then dont do it 
@@ -69,8 +106,9 @@ class PackTool():
             file = files[i]
 
             
-            # print out some kind of progress 
-            print(f"[{i + 1}/{total}]{file}")
+            # print out some kind of progress
+            self.log(file, total, i)
+            
 
             # i like headcrabs
             self.imagemagick(infile=file, outfile=file, binary=binary, arguments=arguments)
@@ -96,9 +134,9 @@ class PackTool():
             file = files[i]
 
             # some kinda progress
-            print(f"[{i + 1}/{total}]{file}")
+            self.log(file, total, i)
 
-            # "and thats how he got abused"
+            # i like gordon ::
 
             self.sox(infile=file, outfile=file, binary=binary, arguments=arguments)
 
@@ -107,6 +145,7 @@ class PackTool():
         # yuh
         self.autoimg()
         self.autosox()
+        self.autooptimize()
 
 # leave me alone
 packtool = PackTool()

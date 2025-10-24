@@ -2,8 +2,15 @@
 
 A simple tool for applying customizations to resource packs.
 
+# Depencencies
+
+- [SoX](https://sourceforge.net/projects/sox/)
+- [ImageMagick](https://imagemagick.org)
+- [oxipng](https://github.com/oxipng/oxipng)
+- `python`
+- `python-pyyaml` or PyPi package `pyyaml`
+
 # Usage
 
-- Create a virtual environment(recommended) then `pip install -r requirements`(any) on Linux install the `python3-pyyaml` package as it is the only required depencency.
 - Configure your settings in the [configuration.yaml](./configuration.yaml) file.
-- Run the script, if it fails, proofread your configuration.yml or file an issue
+- Run the script, if it fails, read your configuration.yml again or file an issue

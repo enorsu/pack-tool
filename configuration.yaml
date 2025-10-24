@@ -1,11 +1,15 @@
-folder: "./soundtest"
+folder: "./textures"
 
 actions:
   imagemagick:
-    enabled: True
+    enabled: False
     binary: "magick"
-    arguments: "-spread 2 -resize 300%"
+    arguments: "+noise Gaussian -attenuate 0.5 -resize 400%"
   sox:
-    enabled: True
+    enabled: False
     binary: "sox"
     arguments: "-v 1000"
+  optimize:
+    enabled: True
+    binary: "oxipng"
+    arguments: "--opt 4 --strip all --alpha"
