@@ -49,8 +49,11 @@ class PackTool():
             self.configuration = yaml.safe_load(file.read())
         print("config loaded", filename)
 
-    def log(self, filename, max, current):
-        print(f"[{current + 1}/{max}]{filename}")
+    def log(self, filename, max, current, optimize = False):
+        if optimize:
+            print(f"[{current + 1}/{max}]", end="")
+        else:
+            print(f"[{current + 1}/{max}]{filename}")
 
     def autooptimize(self):
         # yes i pasted and i don't care about your opinion
@@ -77,7 +80,7 @@ class PackTool():
 
             
             # print out some kind of progress
-            self.log(file, total, i)
+            self.log(file, total, i, optimize=True)
             
 
             # i like eating crowbars
