@@ -76,7 +76,7 @@ class PackTool():
 
             # make it like this for easy access
 
-            file = files[i]
+            file = files[i] 
 
             
             # print out some kind of progress
