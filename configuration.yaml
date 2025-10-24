@@ -1,18 +1,24 @@
-folder: "./textures"
+folder: "./optimzied_4"
 
 actions:
   imagemagick:
-    enabled: False
+    enabled: True
     binary: "magick"
-    arguments: "+noise Gaussian -attenuate 0.5 -resize 400%"
+    # quick explanation:
+    # magick +noise Gaussian -attenuate 0.5
+    # +noise <noise type> -attenuate <amount of noise(max 1.0)>
+    # -resize <size; can be percentage>
+    # https://imagemagick.org/script/command-line-options.php#noise
+    # https://imagemagick.org/script/command-line-options.php#resize
+    arguments: "+noise Gaussian -attenuate 0.5"
   sox:
-    enabled: False
+    enabled: True
     binary: "sox"
     arguments: "-v 1000"
   optimize:
     enabled: True
     binary: "oxipng"
-    arguments: "--opt 6 --strip all --alpha"
+    arguments: "--opt 4 --strip all --alpha"
   optimizeogg:
-    enabled: False
+    enabled: True
     binary: "~/Downloads/optivorbis"
