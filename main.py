@@ -5,11 +5,14 @@ import shutil
 
 # main class
 class PackTool():
+    # inits the thing br
     def __init__(self):
         print("pack-tool by enorsu(idk why i put my name here)")
+        # load cfg
         self.loadConfiguration("./configuration.yaml")
 
     def optimize(self, infile, arguments, binary):
+        # it runs the it runs the it runs the it runs the command
         os.system(f"{binary} {arguments} {infile}")
 
     def imagemagick(self, infile, outfile, arguments, binary):
@@ -45,11 +48,13 @@ class PackTool():
         return list(set(glob.glob(pathname=f"{dir}/**/**/**/**/**/**.{filetype}", recursive=True)))
 
     def loadConfiguration(self, filename):
+        # load config
         with open(filename, "r") as file:
             self.configuration = yaml.safe_load(file.read())
         print("config loaded", filename)
 
     def log(self, filename, max, current, optimize = False):
+        # yeah it fixes it from looking so goddamn ugly
         if optimize:
             print(f"[{current + 1}/{max}]", end="")
         else:
@@ -61,7 +66,7 @@ class PackTool():
         if not self.configuration["actions"]["optimize"]["enabled"]:
             return print("no optimization, doing nothing")
         
-        # get all the settings from config
+        # get all the settings from the config
         binary = self.configuration["actions"]["optimize"]["binary"]
         arguments = self.configuration["actions"]["optimize"]["arguments"]
 
