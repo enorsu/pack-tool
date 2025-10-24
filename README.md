@@ -7,6 +7,7 @@ A simple tool for applying customizations to resource packs.
 - [SoX](https://sourceforge.net/projects/sox/)
 - [ImageMagick](https://imagemagick.org)
 - [oxipng](https://github.com/oxipng/oxipng)
+- [OptiVorbis](https://github.com/OptiVorbis/OptiVorbis)
 - `python`
 - `python-pyyaml` or PyPi package `pyyaml`
 

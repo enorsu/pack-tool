@@ -12,4 +12,7 @@ actions:
   optimize:
     enabled: True
     binary: "oxipng"
-    arguments: "--opt 4 --strip all --alpha"
+    arguments: "--opt 6 --strip all --alpha"
+  optimizeogg:
+    enabled: False
+    binary: "~/Downloads/optivorbis"

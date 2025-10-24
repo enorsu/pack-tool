@@ -15,6 +15,28 @@ class PackTool():
         # it runs the it runs the it runs the it runs the command
         os.system(f"{binary} {arguments} {infile}")
 
+    def ogg(self, infile, outfile, binary):
+        # fuck it we ball(Stop)
+        tmp = "./temp"
+        if not os.path.isdir(tmp):
+            os.mkdir(tmp)
+
+        # command
+        # remove the first dot
+        thing = list(outfile)
+        if thing[0] == ".":
+            thing[0] = ""
+        
+            # make it do the thing into temp file
+        outpfile = tmp + "".join(thing)
+        if not os.path.exists(outpfile):
+            os.makedirs(os.path.dirname(outpfile), exist_ok=True)
+        os.system(f"{binary} {infile} {outpfile}")
+        # move from temp to original location
+        # and before that delete the original one
+        os.remove(outfile)
+        shutil.move(outpfile, outfile)
+
     def imagemagick(self, infile, outfile, arguments, binary):
         # run command
         os.system(f"{binary} {infile} {arguments} {outfile}")
@@ -53,11 +75,13 @@ class PackTool():
             self.configuration = yaml.safe_load(file.read())
         print("config loaded", filename)
 
-    def log(self, filename, max, current, optimize = False):
+    def log(self, filename, max, current, mode = ""):
         # yeah it fixes it from looking so goddamn ugly
-        if optimize:
+        if mode.lower() == "optimize":
             print(f"[{current + 1}/{max}]", end="")
-        else:
+        elif mode.lower() == "num":
+            print(f"[{current + 1}/{max}]")
+        elif mode.lower() == "":
             print(f"[{current + 1}/{max}]{filename}")
 
     def autooptimize(self):
@@ -85,7 +109,7 @@ class PackTool():
 
             
             # print out some kind of progress
-            self.log(file, total, i, optimize=True)
+            self.log(file, total, i, mode="num")
             
 
             # i like eating crowbars
@@ -147,6 +171,31 @@ class PackTool():
             # i like gordon ::
 
             self.sox(infile=file, outfile=file, binary=binary, arguments=arguments)
+    
+    def autogg(self):
+        # STOP COMPLAINING ABOUT ME PASTING MY OWN FUNCTIONS
+        if not self.configuration["actions"]["optimizeogg"]["enabled"]:
+            return print("no optimizeogg, doing nothing")
+        
+        # get config
+        binary = self.configuration["actions"]["optimizeogg"]["binary"]
+
+        directory = self.configuration["folder"]
+
+        files = self.search(directory, "ogg")
+        
+        total = len(files)
+
+        for i in range(total):
+            # easy access
+            file = files[i]
+
+            # some kinda progress
+            self.log(file, total, i, mode="num")
+
+            # i like gordon ::
+
+            self.ogg(binary=binary, infile=file, outfile=file)
 
 
     def automatic(self):
@@ -154,6 +203,7 @@ class PackTool():
         self.autoimg()
         self.autosox()
         self.autooptimize()
+        self.autogg()
 
 # leave me alone
 packtool = PackTool()
